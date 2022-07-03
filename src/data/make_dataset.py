@@ -155,8 +155,11 @@ class MakeDataset:
         import time
         
         now = datetime.now()
-        month = now.strftime('%m')
-        year = now.year        
+        if now.day < 8:
+            month = (now - timedelta(days = 30)).strftime('%m')
+        else:
+            month = now.strftime('%m')
+        year = now.year
         most_recent_date = '{}-{}-08'.format(year, month)
         print('\nGetting data from FRED API as of {}...'.format(most_recent_date))
         

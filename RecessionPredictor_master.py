@@ -15,25 +15,24 @@ import src.visualization.test_results as test_results
 import src.models.deployment as deploy
 import src.visualization.deployment_results as deploy_results
 
+import warnings
+warnings.filterwarnings("ignore")
 
 now = dt.datetime.now()
 month = now.strftime('%m')
 year = now.year
 
-if now.day < 8:
+if now.day < 1:
     raise Exception("""
                     Invalid date. Please run this program on or after
                     the 8th calendar day of the current month.
                     """)
     
-parser = argparse.ArgumentParser()
-parser.add_argument('process', type=str,
-                    help=
-                    """
-                    Which process would you like to run? Choices are "backtest"
-                    or "deploy".
-                    """,
-                    choices=['backtest', 'deploy'])
+parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter,)
+parser.add_argument('--process', required=False,
+                    help='',
+                    default='deploy',
+                    )
 args = parser.parse_args()
 process = args.process
 
